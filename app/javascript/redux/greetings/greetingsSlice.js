@@ -8,9 +8,8 @@ export const fetchGreetings = createAsyncThunk(
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
-      console.log(response);
       const json = await response.json();
-
+      console.log(json);
       return json;
     } catch (error) {
       throw error;
@@ -32,7 +31,8 @@ const greetingsSlice = createSlice({
         state.loading = true;
       })
       .addCase(fetchGreetings.fulfilled, (state, action) => {
-        const data = action.payload.greeting;
+        const data = action.payload.greeting.greeting;
+        console.log(data);
         state.greeting = data;
         state.loading = false;
       })
