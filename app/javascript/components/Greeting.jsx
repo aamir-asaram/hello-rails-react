@@ -1,9 +1,25 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchGreetings } from '../redux/greetings/greetingsSlice';
 
 const Greeting = () => {
+  const dispatch = useDispatch();
+  const { greeting, loading, error } = useSelector(state => state.greetings);
+  console.log(greeting, loading, error);
+  useEffect(() => {
+    dispatch(fetchGreetings());
+    console.log(greeting, loading, error);
+  }, [dispatch]);
+
   return (
     <div>
-      <h1>Hello, World!</h1>
+      {loading ? (
+        <p>Loading...</p>
+      ) : error ? (
+        <p>Error: {error}</p>
+      ) : (
+        <h1>{greeting}</h1>
+      )}
     </div>
   );
 }
