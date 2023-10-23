@@ -3,7 +3,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 export const fetchGreetings = createAsyncThunk(
   'greetings/fetchGreetings',
   async () => {
-    const response = await fetch('/api/greetings');
+    const response = await fetch('/api/v1/greeting');
     const json = await response.json();
     return json.data;
   }
@@ -31,9 +31,5 @@ const greetingsSlice = createSlice({
     },
   },
 });
-
-export const greetingsReducer = greetingsSlice.reducer;
-
-export const selectGreetings = (state) => state.greetings.greetings;
 
 export default greetingsSlice.reducer;
